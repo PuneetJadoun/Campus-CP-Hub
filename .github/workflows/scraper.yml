@@ -2,7 +2,7 @@ name: CP Rating Scraper
 
 on:
   schedule:
-    - cron: "0 3 * * *"
+    - cron: "0 3 * * *"   # runs daily at 3 AM UTC (8:30 AM IST)
   workflow_dispatch:
 
 jobs:
@@ -19,11 +19,13 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
 
       - name: Run scraper
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
+          echo "Starting scraper..."
           cd scraper
           python update_ratings.py
