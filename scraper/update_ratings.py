@@ -1,6 +1,10 @@
 from db import get_connection
 from leetcode import get_leetcode_rating
 from codeforces import get_cf_rating
+from codechef import get_cc_rating
+
+from datetime import datetime
+print("\n--- Scraper started at", datetime.now(), "---\n")
 
 def update_ratings():
     conn = get_connection()
@@ -14,7 +18,10 @@ def update_ratings():
 
         if platform == "leetcode":
             result = get_leetcode_rating(handle)
-
+        
+        elif platform == "codechef":
+            result = get_cc_rating(handle)
+    
         elif platform == "codeforces":
             result = get_cf_rating(handle)
 
@@ -53,3 +60,5 @@ def update_ratings():
 
 if __name__ == "__main__":
     update_ratings()
+
+print("\n--- Scraper finished ---\n")
